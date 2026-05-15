@@ -115,25 +115,26 @@ class _TaskListScreenState extends State<TaskListScreen> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
-            RadioListTile<String>(
-              title: const Text('Due Date (Earliest First)'),
-              value: 'Due Date',
+            RadioGroup<String>(
               groupValue: _sortBy,
-              activeColor: const Color(0xFFE91E8C),
               onChanged: (val) {
                 setState(() => _sortBy = val!);
                 Navigator.pop(ctx);
               },
-            ),
-            RadioListTile<String>(
-              title: const Text('Priority (High to Low)'),
-              value: 'Priority',
-              groupValue: _sortBy,
-              activeColor: const Color(0xFFE91E8C),
-              onChanged: (val) {
-                setState(() => _sortBy = val!);
-                Navigator.pop(ctx);
-              },
+              child: Column(
+                children: [
+                  RadioListTile<String>(
+                    title: const Text('Due Date (Earliest First)'),
+                    value: 'Due Date',
+                    activeColor: const Color(0xFFE91E8C),
+                  ),
+                  RadioListTile<String>(
+                    title: const Text('Priority (High to Low)'),
+                    value: 'Priority',
+                    activeColor: const Color(0xFFE91E8C),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 8),
           ],
@@ -206,7 +207,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   ),
                   const SizedBox(height: 12),
                   DropdownButtonFormField<String>(
-                    value: category,
+                    initialValue: category,
                     decoration: _inputDec('Category', Icons.category),
                     items: ['School', 'Personal', 'Health', 'Work', 'Finance']
                         .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -215,7 +216,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   ),
                   const SizedBox(height: 12),
                   DropdownButtonFormField<String>(
-                    value: priority,
+                    initialValue: priority,
                     decoration: _inputDec('Priority', Icons.flag),
                     items: ['Low', 'Medium', 'High']
                         .map((p) => DropdownMenuItem(value: p, child: Text(p)))
